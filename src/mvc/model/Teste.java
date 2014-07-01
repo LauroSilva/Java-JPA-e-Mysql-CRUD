@@ -30,9 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 {
     @NamedQuery(name = "Teste.findAll", query = "SELECT t FROM Teste t"),
     @NamedQuery(name = "Teste.findByIdteste", query = "SELECT t FROM Teste t WHERE t.idteste = :idteste"),
-    @NamedQuery(name = "Teste.findByNome", query = "SELECT t FROM Teste t WHERE t.nome = :nome"),
-    @NamedQuery(name = "Teste.findBySobreNome", query = "SELECT t FROM Teste t WHERE t.sobreNome = :sobreNome"),
-    @NamedQuery(name = "Teste.findByIdade", query = "SELECT t FROM Teste t WHERE t.idade = :idade")
+    @NamedQuery(name = "Teste.findByNome", query = "SELECT t FROM Teste t WHERE t.nome like :nome"),
+    @NamedQuery(name = "Teste.findBySobreNome", query = "SELECT t FROM Teste t WHERE t.sobreNome like :sobreNome"),
+    @NamedQuery(name = "Teste.findByIdade", query = "SELECT t FROM Teste t WHERE t.idade like :idade")
 })
 public class Teste implements Serializable
 {

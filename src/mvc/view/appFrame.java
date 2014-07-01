@@ -12,6 +12,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -43,6 +45,7 @@ public class appFrame extends javax.swing.JFrame
     public appFrame()
     {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -58,6 +61,8 @@ public class appFrame extends javax.swing.JFrame
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jTabbedPane_Principal = new javax.swing.JTabbedPane();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblMensagem = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -91,10 +96,10 @@ public class appFrame extends javax.swing.JFrame
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jcbCritPesq_R = new javax.swing.JComboBox();
-        jTextField1 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        txtPesq_R = new javax.swing.JTextField();
+        jbtPesq_R = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablePesquisar_R = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         txtPesq_P = new javax.swing.JTextField();
         jbtPesq_P = new javax.swing.JButton();
@@ -154,6 +159,26 @@ public class appFrame extends javax.swing.JFrame
                 jTabbedPane_PrincipalPropertyChange(evt);
             }
         });
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_home.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 25, Short.MAX_VALUE))
+        );
+
+        jTabbedPane_Principal.addTab("Home", jPanel6);
 
         jPanel1.setEnabled(false);
 
@@ -250,7 +275,7 @@ public class appFrame extends javax.swing.JFrame
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtSobreNome, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlbImg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -291,7 +316,7 @@ public class appFrame extends javax.swing.JFrame
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2)))
-                        .addContainerGap(41, Short.MAX_VALUE))))
+                        .addContainerGap(43, Short.MAX_VALUE))))
         );
 
         jTabbedPane_Principal.addTab("Cadastrar", jPanel1);
@@ -403,7 +428,7 @@ public class appFrame extends javax.swing.JFrame
                         .addComponent(jbtEditar_E)
                         .addGap(37, 37, 37)
                         .addComponent(jlbMsg_E, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlbImg_E, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
@@ -463,9 +488,16 @@ public class appFrame extends javax.swing.JFrame
 
         jcbCritPesq_R.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Codigo", "Nome", "Sobre Nome", "Idade" }));
 
-        jButton4.setText("Pesq");
+        jbtPesq_R.setText("Pesq");
+        jbtPesq_R.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jbtPesq_RActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablePesquisar_R.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null, null},
@@ -478,7 +510,7 @@ public class appFrame extends javax.swing.JFrame
                 "Codigo", "Nome", "Sobre Nome", "Idade"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablePesquisar_R);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -492,13 +524,13 @@ public class appFrame extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jcbCritPesq_R, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPesq_R, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4))
+                        .addComponent(jbtPesq_R))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,11 +539,11 @@ public class appFrame extends javax.swing.JFrame
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jcbCritPesq_R, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(txtPesq_R, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtPesq_R))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jTabbedPane_Principal.addTab("Remover", jPanel3);
@@ -549,19 +581,20 @@ public class appFrame extends javax.swing.JFrame
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcbCritPesq_P, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPesq_P, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbtPesq_P)
-                .addContainerGap())
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbCritPesq_P, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPesq_P, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtPesq_P))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -574,7 +607,7 @@ public class appFrame extends javax.swing.JFrame
                     .addComponent(jbtPesq_P))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jTabbedPane_Principal.addTab("Pesquisar", jPanel4);
@@ -605,7 +638,7 @@ public class appFrame extends javax.swing.JFrame
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 486, Short.MAX_VALUE)
+            .addGap(0, 524, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -614,7 +647,7 @@ public class appFrame extends javax.swing.JFrame
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 279, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -629,15 +662,16 @@ public class appFrame extends javax.swing.JFrame
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jTabbedPane_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 306, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jTabbedPane_Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -764,7 +798,7 @@ public class appFrame extends javax.swing.JFrame
     private void jbtPesq_PActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbtPesq_PActionPerformed
     {//GEN-HEADEREND:event_jbtPesq_PActionPerformed
         // TODO add your handling code here:
-        priencherTablePesquisar(jcbCritPesq_P.getSelectedIndex(),Integer.parseInt(txtPesq_P.getText().trim()),txtPesq_P.getText().trim(),txtPesq_P.getText().trim(),txtPesq_P.getText().trim());
+        priencherTablePesquisar();
     }//GEN-LAST:event_jbtPesq_PActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
@@ -778,6 +812,15 @@ public class appFrame extends javax.swing.JFrame
         escolherImagem(jlbImg_E);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jbtPesq_RActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbtPesq_RActionPerformed
+    {//GEN-HEADEREND:event_jbtPesq_RActionPerformed
+        // Remove a Teste
+        priencherTableRemove();
+        
+    }//GEN-LAST:event_jbtPesq_RActionPerformed
+
+    
+    
     public void priencherTableListar(){
         
         tableListar_L.getColumnModel().getColumn(0).setPreferredWidth(50);
@@ -799,9 +842,17 @@ public class appFrame extends javax.swing.JFrame
         } 
     }
     
-    public void priencherTablePesquisar(int opcao,int idTeste,String nome,String sobreNome,String idade){
-        /*
-        List<Teste> listaTestePesquisa = testeDao.pesquisarVarios(opcao, idTeste, nome, sobreNome, idade);
+    public List<Teste> SearchTeste_P(){         
+        return testeDao.findAny(jcbCritPesq_P.getSelectedIndex(), txtPesq_P.getText().trim());
+    }
+    
+    public List<Teste> SearchTeste_R(){         
+        return testeDao.findAny(jcbCritPesq_R.getSelectedIndex(), txtPesq_R.getText().trim());
+    }
+    
+    public void priencherTablePesquisar(){
+        
+        //List<Teste> listaTestePesquisa = testeDao.pesquisarVarios(opcao, idTeste, nome, sobreNome, idade);
         
         tablePesquisar_P.getColumnModel().getColumn(0).setPreferredWidth(50);
         tablePesquisar_P.getColumnModel().getColumn(1).setPreferredWidth(150 );
@@ -810,18 +861,44 @@ public class appFrame extends javax.swing.JFrame
         
         DefaultTableModel modelo = (DefaultTableModel)tablePesquisar_P.getModel();
         modelo.setNumRows(0);
+         
         
-        for(int i = 0 ;  i< listaTestePesquisa.size(); i++){
-            modelo.addRow(new Object []{
-                testeDao.obterListaTeste().get(i).getIdteste(),
-                testeDao.obterListaTeste().get(i).getNome(),
-                testeDao.obterListaTeste().get(i).getSobreNome(),
-                testeDao.obterListaTeste().get(i).getIdade()
+        for (Teste teste : SearchTeste_P())
+        {
+            modelo.addRow(new Object[]{
+                teste.getIdteste(),
+                teste.getNome(),
+                teste.getSobreNome(),
+                teste.getIdade()
             });
-            System.out.println("Nome: "+ testeDao.obterListaTeste().get(i).getNome());
         }
-        */
     }
+    
+    public void priencherTableRemove(){
+        
+        //List<Teste> listaTestePesquisa = testeDao.pesquisarVarios(opcao, idTeste, nome, sobreNome, idade);
+        
+        tablePesquisar_R.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tablePesquisar_R.getColumnModel().getColumn(1).setPreferredWidth(150 );
+        tablePesquisar_R.getColumnModel().getColumn(2).setPreferredWidth(150 );
+        tablePesquisar_R.getColumnModel().getColumn(3).setPreferredWidth(20 );
+        
+        DefaultTableModel modelo = (DefaultTableModel)tablePesquisar_R.getModel();
+        modelo.setNumRows(0);
+         
+        
+        for (Teste teste : SearchTeste_R())
+        {
+            modelo.addRow(new Object[]{
+                teste.getIdteste(),
+                teste.getNome(),
+                teste.getSobreNome(),
+                teste.getIdade()
+            });
+        }
+    }
+    
+    
     
     public void limparDados(){
         txtIdade.setText("");
@@ -919,10 +996,10 @@ public class appFrame extends javax.swing.JFrame
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -936,18 +1013,18 @@ public class appFrame extends javax.swing.JFrame
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane_Principal;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbtEditar_E;
     private javax.swing.JButton jbtPesq_E;
     private javax.swing.JButton jbtPesq_P;
+    private javax.swing.JButton jbtPesq_R;
     private javax.swing.JComboBox jcbCritPesq_P;
     private javax.swing.JComboBox jcbCritPesq_R;
     private javax.swing.JLabel jlbImg;
@@ -957,6 +1034,7 @@ public class appFrame extends javax.swing.JFrame
     private javax.swing.JLabel lblMensagem;
     private javax.swing.JTable tableListar_L;
     private javax.swing.JTable tablePesquisar_P;
+    private javax.swing.JTable tablePesquisar_R;
     private javax.swing.JTextField txtIdade;
     private javax.swing.JTextField txtIdade_E;
     private javax.swing.JTextField txtImg;
@@ -964,6 +1042,7 @@ public class appFrame extends javax.swing.JFrame
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNome1_E;
     private javax.swing.JTextField txtPesq_P;
+    private javax.swing.JTextField txtPesq_R;
     private javax.swing.JTextField txtSobreNome;
     private javax.swing.JTextField txtSobreNome_E;
     // End of variables declaration//GEN-END:variables

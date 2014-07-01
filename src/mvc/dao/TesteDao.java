@@ -7,6 +7,7 @@
 package mvc.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -159,6 +160,46 @@ public class TesteDao implements Serializable
         }
     }
 
+    
+    public Teste findTesteNome(String nome)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            return (Teste) em.createNamedQuery("Teste.findByNome").setParameter("nome","%"+nome+"%").getSingleResult();
+        }
+        finally
+        {
+            em.close();
+        }
+    }
+    
+    public List<Teste> findAny(int codigo, String testo){
+        
+        EntityManager em = getEntityManager();
+        try
+        {
+            if(codigo == 0){
+                List<Teste> listTestes = new ArrayList<Teste>();
+                listTestes.add(findTeste(Integer.parseInt(testo.trim())));
+                return listTestes;
+            }
+            else if(codigo == 1)
+                return em.createNamedQuery("Teste.findByNome").setParameter("nome","%"+testo+"%").getResultList();
+            else if(codigo == 2)
+                return em.createNamedQuery("Teste.findBySobreNome").setParameter("sobreNome","%"+testo+"%").getResultList();
+            else 
+                return em.createNamedQuery("Teste.findByIdade").setParameter("idade","%"+testo+"%").getResultList();
+        }
+        finally
+        {
+            em.close();
+        }
+    }
+    
+    
+    
+    
     public int getTesteCount()
     {
         EntityManager em = getEntityManager();
